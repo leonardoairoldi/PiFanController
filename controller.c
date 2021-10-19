@@ -58,7 +58,7 @@ int main()
     {
         temp = get_temp();
         fanspeed = get_fanspeed(temp);
-        gpioPWM(FAN_PIN, fanspeed);
+        gpioWrite(FAN_PIN, fanspeed);
 
         sleep(5);
     }
@@ -123,5 +123,5 @@ int load_preset()
 
 int get_fanspeed(float temp)
 {
-    return 255;
+    return 1;
 }
