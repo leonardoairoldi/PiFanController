@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <string.h>
+#include <unistd.h>
 
 #define PI_INPUT 0
 #define PI_OUTPUT 1
@@ -57,6 +58,8 @@ int main()
         temp = get_temp();
         fanspeed = get_fanspeed(temp);
         gpioPMW(FAN_PIN, fanspeed);
+
+        sleep(5);
     }
 
     gpioWrite(FAN_PIN, 0);
