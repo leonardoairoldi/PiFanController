@@ -10,7 +10,7 @@
 
 #define TEMP_CMD "cat /sys/class/thermal/thermal_zone0/temp"
 
-#define FAN_PIN 1
+#define FAN_PIN 18
 #define RANGE_MAX 255
 #define CONFIG_FILE "fan.config"
 #define MAX_LENGHT 64
@@ -40,7 +40,7 @@ int main()
 {
     //Set up the routine to respond to interrupts
     signal(SIGINT, signal_handler);
-    signal(SIGKILL, signal_handler);
+    //signal(SIGKILL, signal_handler);
 
     if(load_preset() < 0)
         return -2;
@@ -58,7 +58,7 @@ int main()
     {
         temp = get_temp();
         fanspeed = get_fanspeed(temp);
-        gpioWrite(FAN_PIN, fanspeed);
+        gpioPWM(FAN_PIN, 255);
 
         sleep(5);
     }
@@ -123,5 +123,5 @@ int load_preset()
 
 int get_fanspeed(float temp)
 {
-    return 1;
+    return 255;
 }
