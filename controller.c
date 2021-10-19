@@ -17,12 +17,6 @@
 
 #define DEBUG_MODE 1
 
-// int gpioInitialise() { return 0; };
-// void gpioTerminate() {};
-// void gpioSetMode(int a, int b) {};
-// void gpioWrite(int a, int b) {};
-// void gpioPMW(int a, int b) {};
-// void gpioSetPMWrange(int a, int b) {};
 
 //Functions prototypes
 float get_temp();
@@ -49,7 +43,9 @@ int main()
     }
 
     
-    //Set up the routine to respond to interrupts
+    // Set up the routine to respond to interrupts
+    // After gpioInitialise() beacuse the library defines sigHandlers
+    
     signal(SIGINT, signal_handler);
 
     gpioSetMode(FAN_PIN, PI_OUTPUT);
