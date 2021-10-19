@@ -38,8 +38,6 @@ void signal_handler(int signal) { exit_called = 1; printf("Raised signal: %d\n",
 
 int main()
 {
-    //Set up the routine to respond to interrupts
-    signal(SIGINT, signal_handler);
     //signal(SIGKILL, signal_handler);
 
     if(load_preset() < 0)
@@ -49,6 +47,10 @@ int main()
         printf("Error initializing gpio\n");
         return -1;
     }
+
+    
+    //Set up the routine to respond to interrupts
+    signal(SIGINT, signal_handler);
 
     gpioSetMode(FAN_PIN, PI_OUTPUT);
 
