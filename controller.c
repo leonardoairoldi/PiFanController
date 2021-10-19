@@ -58,7 +58,7 @@ int main()
     {
         temp = get_temp();
         fanspeed = get_fanspeed(temp);
-        gpioPMW(FAN_PIN, fanspeed);
+        gpioPWM(FAN_PIN, fanspeed);
 
         sleep(5);
     }
