@@ -59,7 +59,7 @@ int main()
     gpioTerminate();
 }
 
-float getTemp()
+float get_temp()
 {
     /*
      *
