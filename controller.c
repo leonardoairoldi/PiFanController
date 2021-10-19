@@ -7,10 +7,14 @@
 #define PI_INPUT 0
 #define PI_OUTPUT 1
 
+#define TEMP_CMD "cat /sys/class/thermal/thermal_zone0/temp"
+
 #define FAN_PIN 1
 #define RANGE_MAX 255
 #define CONFIG_FILE "fan.config"
 #define MAX_LENGHT 64
+
+#define DEBUG_MODE 1
 
 int gpioInitialise() { return 0; };
 void gpioTerminate() {};
@@ -29,7 +33,7 @@ int a, b, c; //Curve coefficients
 
 //Global variable to handle the exit of the program with interrupts
 volatile int exit_called = 0;
-void signal_handler(int signal) { exit_called = 1; printf("Raised signal: %d", signal); }
+void signal_handler(int signal) { exit_called = 1; printf("Raised signal: %d\n", signal); }
 
 int main()
 {
@@ -61,11 +65,17 @@ int main()
 
 float get_temp()
 {
-    /*
-     *
-     * INSERT TMP SENSOR CODE HERE
-     * 
-     */
+    FILE* fp;
+	fp = popen(TEMP_CMD, "r");
+
+	int x;
+	fscanf(fp, "%d", &x);
+
+    pclose(fp);
+	
+    if(DEBUG_MODE) printf("%f\n", x/1000);
+
+    return (float)x / 1000;
 }
 
 int load_preset()
