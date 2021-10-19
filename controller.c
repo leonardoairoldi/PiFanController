@@ -76,7 +76,7 @@ float get_temp()
 
     pclose(fp);
 	
-    if(DEBUG_MODE) printf("%f\n", x/1000);
+    if(DEBUG_MODE) printf("%f\n", (float)x/1000);
 
     return (float)x / 1000;
 }
