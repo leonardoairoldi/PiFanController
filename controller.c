@@ -1,4 +1,4 @@
-//#include <pigpio.h>
+#include <pigpio.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
@@ -17,12 +17,12 @@
 
 #define DEBUG_MODE 1
 
-int gpioInitialise() { return 0; };
-void gpioTerminate() {};
-void gpioSetMode(int a, int b) {};
-void gpioWrite(int a, int b) {};
-void gpioPMW(int a, int b) {};
-void gpioSetPMWrange(int a, int b) {};
+// int gpioInitialise() { return 0; };
+// void gpioTerminate() {};
+// void gpioSetMode(int a, int b) {};
+// void gpioWrite(int a, int b) {};
+// void gpioPMW(int a, int b) {};
+// void gpioSetPMWrange(int a, int b) {};
 
 //Functions prototypes
 float get_temp();
@@ -40,6 +40,7 @@ int main()
 {
     //Set up the routine to respond to interrupts
     signal(SIGINT, signal_handler);
+    signal(SIGKILL, signal_handler);
 
     if(load_preset() < 0)
         return -2;
@@ -62,6 +63,7 @@ int main()
         sleep(5);
     }
 
+    printf("Program Exited correctly\n");
     gpioWrite(FAN_PIN, 0);
     gpioTerminate();
 }
@@ -76,7 +78,7 @@ float get_temp()
 
     pclose(fp);
 	
-    if(DEBUG_MODE) printf("%f\n", (float)x/1000);
+    if(DEBUG_MODE) printf("%f\n", (float)x/1000); // Debug
 
     return (float)x / 1000;
 }
@@ -121,5 +123,5 @@ int load_preset()
 
 int get_fanspeed(float temp)
 {
-
+    return 255;
 }
