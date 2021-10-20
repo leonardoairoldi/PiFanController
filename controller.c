@@ -45,7 +45,7 @@ int main()
     
     // Set up the routine to respond to interrupts
     // After gpioInitialise() beacuse the library defines sigHandlers
-    
+
     signal(SIGINT, signal_handler);
 
     gpioSetMode(FAN_PIN, PI_OUTPUT);
@@ -121,5 +121,6 @@ int load_preset()
 
 int get_fanspeed(float temp)
 {
+    
     return 255;
 }
