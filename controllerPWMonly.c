@@ -1,3 +1,4 @@
+#include <limits.h>
 #include <pigpio.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -49,7 +50,7 @@ int main(int argc, char* argv[])
     while(!exit_called)
     {
         gpioPWM(FAN_PIN, fanspeed);
-        sleep();
+        sleep(UINT_MAX);
     }
 
     printf("Program Exited correctly\n");
@@ -61,7 +62,7 @@ int get_fanspeed(char* argv[])
 {
     int fans = atoi(argv[1]);
     if(fans < 0 || fans > 255) {
-        printf("Invalid fanspeed. Please use a number between 0 and 255.\n")
+        printf("Invalid fanspeed. Please use a number between 0 and 255.\n");
         return -1;
     }
     return fans;
