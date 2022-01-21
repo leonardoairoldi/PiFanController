@@ -1,3 +1,4 @@
+#include <limits.h>
 #include <pigpio.h>
 #include <stdio.h>
 #include <stdlib.h>
