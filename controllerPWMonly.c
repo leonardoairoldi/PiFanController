@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
-#include <string.h>
 #include <unistd.h>
 
 #define PI_INPUT 0
