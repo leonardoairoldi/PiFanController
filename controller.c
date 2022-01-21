@@ -30,7 +30,7 @@ int a, b, c; //Curve coefficients
 volatile int exit_called = 0;
 void signal_handler(int signal) { exit_called = 1; printf("Raised signal: %d\n", signal); }
 
-int main()
+int main(int argc, char* argv)
 {
     //signal(SIGKILL, signal_handler);
 
@@ -44,7 +44,8 @@ int main()
 
     
     // Set up the routine to respond to interrupts
-    // After gpioInitialise() beacuse the library defines sigHandlers
+    // Important!
+    // Set the interrupt routine after gpioInitialise() beacuse the library defines sigHandlers
 
     signal(SIGINT, signal_handler);
 
@@ -56,7 +57,7 @@ int main()
     {
         temp = get_temp();
         fanspeed = get_fanspeed(temp);
-        gpioPWM(FAN_PIN, 255);
+        gpioPWM(FAN_PIN, fanspeed);
 
         sleep(5);
     }
@@ -121,6 +122,5 @@ int load_preset()
 
 int get_fanspeed(float temp)
 {
-    
     return 255;
 }
