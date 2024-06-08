@@ -122,5 +122,8 @@ int load_preset()
 
 int get_fanspeed(float temp)
 {
+    if(temp < a) return 0;
+    //else if (temp < b) return 100;
+    //else if (temp < c) return 180;
     return 255;
 }
